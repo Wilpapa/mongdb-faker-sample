@@ -1,5 +1,5 @@
 # mongdb-faker-sample
-Sample python code to generate fake MongoDB data using single and multiple processes
+Sample python code to generate fake MongoDB data using Faker library running single or multiple processes. The goal is both to generate usable data in MongoDB and to benchmark write performance depending on number of parallel processes and bulk write size.
 
 Files
 -----
