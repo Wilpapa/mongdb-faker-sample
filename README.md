@@ -4,8 +4,8 @@ Sample python code to generate fake MongoDB data using Faker library running sin
 Files
 -----
 
+- fakerFR.py : single process version
 - fakerFR-multiprocess.py : multiprocess version
-- (single process version soon)
 
 Usage
 ----
