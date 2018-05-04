@@ -7,6 +7,12 @@ Files
 - fakerFR.py : single process version
 - fakerFR-multiprocess.py : multiprocess version
 
+
+Prerequisites
+-------------
+
+- install faker library : ``$ pip install faker``
+
 Usage
 ----
 
@@ -40,4 +46,3 @@ insert query update delete getmore command dirty used flushes vsize  res qrw arw
  31886    *0     *0     *0       0     1|0  1.6% 1.6%       0 3.28G 170M 0|0 1|0  8.41m   51.4k   33 Jan 31 16:00:30.260
  32345    *0     *0     *0       0     2|0  1.7% 1.7%       0 3.29G 181M 0|0 1|0  8.52m   52.1k   33 Jan 31 16:00:31.249
 ```
-
