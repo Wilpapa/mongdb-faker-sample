@@ -11,7 +11,9 @@ Files
 Prerequisites
 -------------
 
+- Python 2.7 is installed
 - install faker library : ``$ pip install faker``
+- install pymongo driver : ``$ pip install pymongo``
 
 Usage
 ----
