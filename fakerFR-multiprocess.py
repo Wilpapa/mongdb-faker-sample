@@ -1,4 +1,6 @@
 # sample use of faker lib / GM@Mongo 20170701
+#https://faker.readthedocs.io/en/master/
+#https://faker.readthedocs.io/en/master/providers/faker.providers.address.html
 
 # let's import all libraries (Mongo and Faker)
 import pymongo
@@ -6,15 +8,17 @@ from pymongo.errors import BulkWriteError
 from faker import Factory
 from multiprocessing import Process
 import time
+import random
+
 #Number of processes to launch
-processesNumber = 16
+processesNumber = 8
 processesList = []
 
-#Settings pour Faker
-fake = Factory.create('fr_FR') # using french names, cities, etc.
+#Settings for Faker, change locale to create other language data
+fake = Factory.create('fr_FR') # using french names, cities, etc. // fr_FR is almost 10 times faster than en_US
 
 #batch size and bulk size
-batchSize=1000000
+batchSize=125001
 bulkSize=1000
 
 def run(processId):
@@ -29,7 +33,7 @@ def run(processId):
     # let's insert batchSize records
     for i in range(batchSize):
         if (i%bulkSize== 0): #print every bulkSize writes
-            print('%s - process %s - records %s '% (time.strftime("%H:%M:%S"),processId,i))
+            print('%s - process %s - records %s \n'% (time.strftime("%H:%M:%S"),processId,i))
 
         if (i%bulkSize == (bulkSize-1)): #bulk write
             try:
@@ -38,24 +42,26 @@ def run(processId):
                 pprint(bwe.details)
             bulk = customers.initialize_unordered_bulk_op() #and reinit the bulk op
 
-        # Fake customer info - this is where you build your people document
-        addr=fake.address()
-        addrstreet=addr.split("\n")
-        addrcity=addrstreet[1]
+        # Fake person info - this is where you build your people document
         # Create customer record
         try:
             result=bulk.insert({
-                                "name":fake.name(),
+                                "process":processId,
+                                "index":i,
+                                "lastName":fake.last_name(),
+                                "firstName":fake.first_name(),
                                 "ssn":fake.ssn(),
                                 "job":fake.job(),
                                 "phone":[
-                                        {"home":fake.phone_number()},
-                                        {"cell":fake.phone_number()}
+                                        {"type":"home","number":fake.phone_number()},
+                                        {"type":"cell","number":fake.phone_number()}
                                 ],
                                 "address":{
-                                            "street":addrstreet[0],
-                                            "city":addrcity
-                                }
+                                            "street":fake.street_address(),
+                                            "city":fake.city()
+                                },
+                                "revenue": random.randint(50000,250000),
+                                "age": random.randint(20,60),
             })
         except Exception as e:
             print "insert failed:", i, " error : ", e
