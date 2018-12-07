@@ -1,6 +1,6 @@
 # sample use of faker lib / GM@Mongo 20170701
 #https://faker.readthedocs.io/en/master/
-#https://faker.readthedocs.io/en/master/providers/faker.providers.address.html
+#https://faker.readthedocs.io/en/master/providers/faker.providers.address.html -
 
 # let's import all libraries (Mongo and Faker)
 import pymongo
