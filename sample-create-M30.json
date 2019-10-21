@@ -1,0 +1,27 @@
+{
+	
+	"name" : "POV6-Consistency",
+	
+	"numShards" : 4,
+
+	"replicationFactor" : 3,
+
+	"providerSettings" : {
+		
+		"providerName" : "AWS",
+
+		"regionName" : "US_EAST_1",
+
+		"instanceSizeName" : "M30",
+
+		"diskIOPS" : 100,
+
+		"encryptEBSVolume" : false
+
+	},
+
+	"diskSizeGB" : 10,
+
+	"backupEnabled" : false
+
+}
